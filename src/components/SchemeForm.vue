@@ -1,14 +1,15 @@
 <template>
-    <div class="container">
-    <div class="layout">
-        123
-    </div>
-    </div>
+  <div></div>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'Schemes',
+  name: 'scheme-form',
 });
 </script>
+
+<style>
+
+</style>

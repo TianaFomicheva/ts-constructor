@@ -1,10 +1,20 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <Header />
   </div>
   <router-view/>
 </template>
+<script lang="ts">
+import { defineComponent } from 'vue';
+import Header from '@/components/Header.vue'; // @ is an alias to /src
+
+export default defineComponent({
+  name: 'Home',
+  components: {
+    Header,
+  },
+});
+</script>
 
 <style lang="scss">
 #app {
@@ -14,7 +24,10 @@
   text-align: center;
   color: #2c3e50;
 }
-
+.container{
+  max-width: 1120px;
+  margin: 0 auto;
+}
 #nav {
   padding: 30px;
 
