@@ -1,39 +1,24 @@
 <template>
-  <form>
-    <div class="form-field">
-      <label
-        ><span class="red">*</span>Ключ свойства
-        <input placeholder="Укажите ключ свойства" />
-      </label>
-    </div>
-    <div class="form-field">
-      <label
-        ><span class="red">*</span>Название свойства
-        <input placeholder="Укажите название свойства" />
-      </label>
-    </div>
-    <div class="form-field">
-      <label
-        ><span class="red">*</span>Поле для отображения
-        <select>
-          <option disabled selected>Выберите поле для отображения</option>
-          <option>Текстовое поле</option>
-          <option>Числовое поле</option>
-          <option>Пароль</option>
-          <option>Чекбокс</option>
-          <option>Номер телефона</option>
-          <option>Выпадающий список</option>
-        </select>
-      </label>
-    </div>
-  </form>
+  <scheme-form @set-prop-item="setPropertyItem"/>
 </template>
 
-<script lang="ts">
+<script lang='ts'>
 import { defineComponent } from 'vue';
+import SchemeForm from './SchemeForm.vue';
 
 export default defineComponent({
+  components: { SchemeForm },
   name: 'scheme-property',
+  data() {
+    return { property: [] };
+  },
+  methods: {
+    setPropertyItem(item: any) {
+      if (this.property.length > 0) {
+        const index = this.property.findIndex((itm: any) => itm.key === item.key);
+      }
+    },
+  },
 });
 </script>
 
@@ -48,7 +33,8 @@ form {
     display: block;
     font-size: 22px;
   }
-  input, select {
+  input,
+  select {
     display: block;
     width: 422px;
   }
