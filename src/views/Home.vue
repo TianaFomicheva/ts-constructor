@@ -1,18 +1,27 @@
 <template>
   <div>
-    <Schemes />
+    <Login v-if="!isLogged"/>
+    <Schemes v-else/>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { mapGetters } from 'vuex';
 import Schemes from '@/components/Schemes.vue'; // @ is an alias to /src
+import Login from '@/components/Login.vue'; // @ is an alias to /src
 
 export default defineComponent({
   name: 'Home',
   components: {
     Schemes,
-
+    Login,
+  },
+  data() {
+    return { isLogged: false };
+  },
+  computed: {
+    ...mapGetters(['isLogged']),
   },
 });
 </script>
