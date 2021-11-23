@@ -9,7 +9,8 @@
     <div class="form-field">
       <label
         ><span class="red">*</span>Название свойства
-        <input v-model="name" placeholder="Укажите название свойства" />
+        <input v-model="name"
+        placeholder="Укажите название свойства" @input="setValue($event, 'name')"/>
       </label>
     </div>
     <div class="form-field">
@@ -55,7 +56,9 @@ export default defineComponent({
         default:
           break;
       }
+      // console.log(this.item);
       if (this.item.fieldType && this.item.name && this.item.key) {
+        console.log(this.item);
         this.$emit('set-prop-item', this.item);
       }
     },

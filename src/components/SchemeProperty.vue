@@ -14,21 +14,34 @@ import { defineComponent } from 'vue';
 import { mapActions } from 'vuex';
 import SchemeForm from './SchemeForm.vue';
 
+type myType = {
+  key: 'string',
+  name: 'string',
+  fieldType: 'string',
+}
+
 export default defineComponent({
   components: { SchemeForm },
   name: 'scheme-property',
   data() {
-    return { property: [{}] };
+    return { property: Array<myType>() };
+  },
+  mounted() {
+    const emptyObj = {} as myType;
+    this.property.push(emptyObj);
   },
   methods: {
     ...mapActions(['createScheme']),
     setPropertyItem(item: any) {
-      if (this.property.length > 0) {
-        const index = this.property.findIndex((itm: any) => itm.key === item.key);
+      console.log(item);
+      const index = this.property.findIndex((itm: any) => !itm.key);
+      if (index !== -1) {
+        this.property.splice(index, 1, item);
       }
+      console.log(this.property);
     },
     createItem() {
-      this.property.push({});
+      // this.property.push({});
     },
     createProperty() {
       this.createScheme(this.property);
