@@ -2,6 +2,7 @@
 
   <scheme-form v-for="(item, index) in property" :key = index @set-prop-item="setPropertyItem" />
   <div class="column-2">
+    {{curSchema}}111
   <button class="form-button" @click="createItem">Добавить новое свойство</button>
   </div>
   <div class="column-2">
@@ -11,10 +12,10 @@
 
 <script lang='ts'>
 import { defineComponent } from 'vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import SchemeForm from './SchemeForm.vue';
 
-type myType = {
+type propertyType = {
   key: 'string',
   name: 'string',
   fieldType: 'string',
@@ -24,11 +25,22 @@ export default defineComponent({
   components: { SchemeForm },
   name: 'scheme-property',
   data() {
-    return { property: Array<myType>() };
+    return { property: Array<propertyType>() };
+  },
+  props: {
+    curSchema: {
+      type: Array,
+      default: () => [],
+    },
   },
   mounted() {
-    const emptyObj = {} as myType;
-    this.property.push(emptyObj);
+    if (this.curSchema.length === 0) {
+      const emptyObj = {} as propertyType;
+      this.property.push(emptyObj);
+    }
+  },
+  computed: {
+    ...mapGetters(['getSchemes']),
   },
   methods: {
     ...mapActions(['createScheme']),

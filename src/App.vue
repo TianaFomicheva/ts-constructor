@@ -27,16 +27,17 @@ export default defineComponent({
 .container{
   max-width: 1120px;
   margin: 0 auto;
+  padding:20px;
 }
 #nav {
   padding: 30px;
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: #1390E5;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #1390E5;
     }
   }
 }

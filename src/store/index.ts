@@ -7,6 +7,7 @@ export default createStore({
     properties: [],
     isLogged: false,
     token: '',
+    schemes: [],
   },
   mutations: {
   },
@@ -15,7 +16,7 @@ export default createStore({
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          await axios.post(`${api}form`, { schema: payload }, {
+          const res:any = await axios.post(`${api}form`, { schema: payload }, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -27,6 +28,42 @@ export default createStore({
       } else {
         alert('Вы не авторизованы');
       }
+    },
+    async getSchemes({ commit }):Promise<any> {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const res = await axios.get(`${api}form`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          return res.data;
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        alert('Вы не авторизованы');
+      }
+      return false;
+    },
+    async getScheme({ commit }, payload:number):Promise<any> {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const res = await axios.get(`${api}form/${payload}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          return res.data;
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        alert('Вы не авторизованы');
+      }
+      return false;
     },
     async signUp({ commit }, payload: any) {
       try {
@@ -41,7 +78,7 @@ export default createStore({
       try {
         console.log(commit);
         await axios.post(`${api}auth/login`, { username: payload.username, password: payload.password })
-          .then((response:any) => { console.log(response); localStorage.setItem('token', response.data.access_token); });
+          .then((response:any) => { localStorage.setItem('token', response.data.access_token); });
       } catch (error) {
         console.error(error);
       }
