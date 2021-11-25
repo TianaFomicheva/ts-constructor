@@ -29,6 +29,11 @@ export default defineComponent({
   margin: 0 auto;
   padding:20px;
 }
+.dotted{
+  padding-top:20px;
+  padding-bottom: 20px;
+  border-bottom: 1px dotted rgb(192, 191, 191);
+}
 #nav {
   padding: 30px;
 

@@ -3,13 +3,14 @@
     <div class="form-field">
       <label
         ><span class="red">*</span>Ключ свойства
-        <input v-model="key" placeholder="Укажите ключ свойства" @input="setValue($event, 'key')"/>
+        <input v-model="item.key" :key="item.key"
+        placeholder="Укажите ключ свойства" @input="setValue($event, 'key')"/>
       </label>
     </div>
     <div class="form-field">
       <label
         ><span class="red">*</span>Название свойства
-        <input v-model="name"
+        <input v-model="item.name"
         placeholder="Укажите название свойства" @input="setValue($event, 'name')"/>
       </label>
     </div>
@@ -17,7 +18,7 @@
       <label
         ><span class="red">*</span>Поле для отображения
         <div>
-        <select @change="setValue($event, 'fieldType')">
+        <select v-model="item.fieldType" @change="setValue($event, 'fieldType')">
           <option disabled selected>Выберите поле для отображения</option>
           <option value="text">Текстовое поле</option>
           <option value="number">Числовое поле</option>
@@ -34,14 +35,33 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
+
+type propertyType = {
+  key: 'string',
+  name: 'string',
+  fieldType: 'string',
+}
 
 export default defineComponent({
   name: 'scheme-form',
   data() {
     return { item: { key: '', name: '', fieldType: '' } };
   },
+  props: {
+    property: Object as PropType<propertyType>,
+  },
+  mounted() {
+    console.log(this.property);
+    this.assignPropValues(this.property);
+  },
   methods: {
+    assignPropValues(property: any) {
+      this.item.key = property?.key;
+      this.item.name = property?.name;
+      this.item.fieldType = property?.fieldType;
+      console.log(this.item);
+    },
     setValue(event: any, itemProp: string) {
       switch (itemProp) {
         case 'key':

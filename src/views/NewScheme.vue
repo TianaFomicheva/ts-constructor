@@ -1,19 +1,19 @@
 <template>
   <div class="container">
     <div class="layout">
-    <scheme-property />
+    <new-edit-scheme />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import SchemeProperty from '@/components/SchemeProperty.vue';
+import NewEditScheme from '@/components/NewEditScheme.vue';
 
 export default defineComponent({
   name: 'new-scheme',
   components: {
-    SchemeProperty,
+    NewEditScheme,
 
   },
 });

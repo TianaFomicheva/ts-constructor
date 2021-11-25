@@ -29,6 +29,25 @@ export default createStore({
         alert('Вы не авторизованы');
       }
     },
+    async updateScheme({ commit }) {
+      const token = localStorage.getItem('token');
+      const payload = { schemaName: 'Name1', properties: [{ key: 'key1', name: 'name1', fieldType: 'text' }] };
+      if (token) {
+        try {
+          const res:any = await axios.post(`${api}form/186`, { schema: payload }, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+            .then((response) => { console.log(response); });
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        alert('Вы не авторизованы');
+      }
+      return true;
+    },
     async getSchemes({ commit }):Promise<any> {
       const token = localStorage.getItem('token');
       if (token) {
