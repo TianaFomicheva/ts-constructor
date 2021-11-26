@@ -6,18 +6,22 @@
 </div>
   <scheme-form v-for="(item, index) in properties"
   :key = index @set-prop-item="setPropertyItem" :property="item" />
-  <div class="column-2 dotted">
-  <button class="form-button" @click="createItem">Добавить новое свойство</button>
+  <div class="form-column dotted">
+  <div class="w-422">
+  <button class="form-button"
+  @click="createItem">Добавить новое свойство {{properties.length}}</button>
   </div>
-  <div class="column-2">
-     <button class="form-button" @click="createSchema">{{ createButtonText }}</button>
+  </div>
+   <div class="form-column">
+  <div class="w-422">
+     <button class="form-button" @click="createUpdateSchema">{{ createButtonText }}</button>
+  </div>
   </div>
 </template>
 
 <script lang='ts'>
 import { defineComponent, PropType } from 'vue';
-import { mapGetters } from 'vuex';
-// import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import SchemeForm from './SchemeForm.vue';
 
 type propertyType = {
@@ -49,7 +53,7 @@ export default defineComponent({
     if (!this.curSchema?.id) {
       const emptyObj = {} as propertyType;
       console.log(777);
-      this.properties.push(emptyObj);
+      // this.properties.push(emptyObj);
     }
     console.log(this.curSchema?.schema.schemaName);
     if (this.curSchema) {
@@ -67,32 +71,43 @@ export default defineComponent({
       this.schemaName = schema.schemaName;
       this.properties = schema.properties;
     },
-    // ...mapActions(['createScheme']),
+    ...mapActions(['createScheme', 'updateScheme']),
     setPropertyItem(item: any) {
-      console.log(item);
+      // console.log(item);
       const index = this.properties.findIndex((itm: any) => !itm.key);
-      if (index !== -1) {
-        this.properties.splice(index, 1, item);
-      } else {
-        this.properties.push(item);
-        console.log(this.properties, '222');
-      }
+      // if (index !== -1) {
+      this.properties.splice(index, 1, item);
+      // } else {
+      //   // this.properties.push(item);
+      // }
+      console.log(this.properties);
     },
     createItem() {
       // this.property.push({});
     },
-    createSchema() {
-      console.log({ name: this.schemaName, properties: this.properties });
-      // this.createScheme(this.property);
+    createUpdateSchema() {
+      if (this.curSchema?.id) {
+        console.log({ name: this.schemaName, properties: this.properties });
+        this.updateScheme({ id: this.curSchema.id, schemaVal: this.curSchema });
+      } else {
+        // this.createScheme(this.property);
+      }
     },
   },
 });
 </script>
 
 <style lang="scss">
+.w-422{
+  width:422px;
+  display: inline-block;
+}
 .form{
+    &-column{
+      width:50%
+    }
   &-button{
-    display: inline-block;
+    display: block;
     line-height: 1;
     white-space: nowrap;
     cursor: pointer;

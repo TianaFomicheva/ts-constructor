@@ -4,9 +4,10 @@
       <!-- <button @click="update">Update</button> -->
 <div v-for="scheme in schemes" :key="scheme.key" class="table-row">
     <div class="table-cell-70"> {{ scheme.schema.schemaName}}</div>
-    <div class="table-cell-10" @click="showScheme(scheme.id)">Show</div>
-    <div class="table-cell-10" @click="editScheme(scheme.id)">Edit</div>
-    <div class="table-cell-10" @click="deleteScheme(scheme.id)">Delete</div>
+    <div class="table-cell-10" @click="showScheme(scheme.id)"><span class="link">Show</span></div>
+    <div class="table-cell-10" @click="editScheme(scheme.id)"><span class="link">Edit</span></div>
+    <div class="table-cell-10" @click="deleteScheme(scheme.id)">
+      <span class="link">Delete</span></div>
   </div>
     <NewEditScheme v-if="showSchema" :cur-schema="curSchema"/>
     </div>
@@ -45,7 +46,6 @@ export default defineComponent({
   async mounted() {
     const rawSchemesdata = await this.getSchemes();
     this.schemes = JSON.parse(JSON.stringify(rawSchemesdata));
-    console.log(this.schemes[0].schema);
   },
   methods: {
     ...mapActions(['getSchemes', 'getScheme', 'updateScheme']),
@@ -54,7 +54,6 @@ export default defineComponent({
     },
     async editScheme(id:number) {
       const curScheme = await this.getScheme(id);
-      console.log(curScheme);
       this.curSchema = curScheme;
       this.showSchema = true;
     },
@@ -68,6 +67,9 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
+.link{
+  cursor: pointer;
+}
 .table{
   &-row{
     width:100%;

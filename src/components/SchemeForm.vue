@@ -105,6 +105,7 @@ export default defineComponent({
     font-size: 16px;
     line-height: 22px;
     font-weight: bold;
+    text-align: left;
   }
   input,
   select {
