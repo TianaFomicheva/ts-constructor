@@ -44,7 +44,7 @@ type propertyType = {
 }
 
 export default defineComponent({
-  name: 'scheme-form',
+  name: 'property-form',
   data() {
     return { item: { key: '', name: '', fieldType: '' } };
   },
@@ -52,7 +52,6 @@ export default defineComponent({
     property: Object as PropType<propertyType>,
   },
   mounted() {
-    console.log(this.property);
     this.assignPropValues(this.property);
   },
   methods: {
@@ -60,7 +59,6 @@ export default defineComponent({
       this.item.key = property?.key;
       this.item.name = property?.name;
       this.item.fieldType = property?.fieldType;
-      console.log(this.item);
     },
     setValue(event: any, itemProp: string) {
       switch (itemProp) {

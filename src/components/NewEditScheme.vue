@@ -4,7 +4,7 @@
   <input v-model="schemaName" />
   </label>
 </div>
-  <scheme-form v-for="(item, index) in properties"
+  <property-form v-for="(item, index) in properties"
   :key = index @set-prop-item="setPropertyItem" :property="item" />
   <div class="form-column dotted">
   <div class="w-422">
@@ -22,7 +22,7 @@
 <script lang='ts'>
 import { defineComponent, PropType } from 'vue';
 import { mapActions, mapGetters } from 'vuex';
-import SchemeForm from './SchemeForm.vue';
+import PropertyForm from './PropertyForm.vue';
 
 type propertyType = {
   key: 'string',
@@ -39,7 +39,7 @@ type schemaType = {
 }
 
 export default defineComponent({
-  components: { SchemeForm },
+  components: { PropertyForm },
   name: 'new-edit-scheme',
   data() {
     return { properties: Array<propertyType>(), schemaName: '' };
@@ -52,8 +52,7 @@ export default defineComponent({
   mounted() {
     if (!this.curSchema?.id) {
       const emptyObj = {} as propertyType;
-      console.log(777);
-      // this.properties.push(emptyObj);
+      this.properties.push(emptyObj);
     }
     console.log(this.curSchema?.schema.schemaName);
     if (this.curSchema) {
@@ -74,16 +73,22 @@ export default defineComponent({
     ...mapActions(['createScheme', 'updateScheme']),
     setPropertyItem(item: any) {
       // console.log(item);
-      const index = this.properties.findIndex((itm: any) => !itm.key);
-      // if (index !== -1) {
-      this.properties.splice(index, 1, item);
-      // } else {
-      //   // this.properties.push(item);
-      // }
+      const index = this.properties.findIndex((itm: any) => itm.key === item.key);
+      const index1 = this.properties.findIndex((itm: any) => itm.name === item.name);
+      const ind = Math.max(index, index1);
+      console.log(ind);
+      if (ind !== -1) {
+        this.properties.splice(index, 1, item);
+      } else {
+        const index2 = this.properties.findIndex((itm: any) => !itm.key);
+        console.log(index2);
+        this.properties.splice(index2, 1, item);
+      }
       console.log(this.properties);
     },
     createItem() {
-      // this.property.push({});
+      const emptyObj = {} as propertyType;
+      this.properties.push(emptyObj);
     },
     createUpdateSchema() {
       if (this.curSchema?.id) {
