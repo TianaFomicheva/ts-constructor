@@ -3,7 +3,7 @@
     <div class="layout">
       <!-- <button @click="update">Update</button> -->
 <div v-for="scheme in schemes" :key="scheme.key" class="table-row">
-    <div class="table-cell-70"> {{ scheme.schema.schemaName}}</div>
+    <div class="table-cell-70"> {{ scheme.schema.schemaName}}111</div>
     <div class="table-cell-10" @click="showScheme(scheme.id)"><span class="link">Show</span></div>
     <div class="table-cell-10" @click="editScheme(scheme.id)"><span class="link">Edit</span></div>
     <div class="table-cell-10" @click="deleteScheme(scheme.id)">
