@@ -2,15 +2,18 @@
   <div class="header">
     <div class="container">
       <div class="header-links">
-      <div class="header-links_left">
+      <div class="header-links__left">
         <div class="header-link">
-        <router-link to="/">Список схем</router-link>
+        <router-link to="/"><img src="~@/assets/sibdev-logo.png" /></router-link>
+        </div>
+        <div class="header-link">
+        <router-link to="/">Мои схемы</router-link>
         </div>
         <div class="header-link">
         <router-link to="/new">Создать новую схему</router-link>
         </div>
       </div>
-      <div class="header-links_right">
+      <div class="header-links__right">
         <div class="header-link">
         <router-link to="/logout">Выйти</router-link>
         </div>
@@ -30,9 +33,14 @@ export default defineComponent({
 <style lang="scss" scoped>
 .header {
   height: 60px;
+  background: #fff;
   &-links {
     display: flex;
     justify-content: space-between;
+    &__left, &__right{
+      display: flex;
+      align-items: center;
+    }
 
   }
   &-link{

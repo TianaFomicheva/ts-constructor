@@ -3,11 +3,16 @@
     <div class="layout">
       <!-- <button @click="update">Update</button> -->
 <div v-for="scheme in schemes" :key="scheme.key" class="table-row">
-    <div class="table-cell-80"> {{ scheme.schema.schemaName}}</div>
-    <div class="table-cell-10" @click="showScheme(scheme.id)"><span class="link">Show</span></div>
-    <div class="table-cell-10" @click="editScheme(scheme.id)"><span class="link">Edit</span></div>
+    <div class="table-cell-80 left"> {{ scheme.schema.schemaName}}</div>
+    <div class="table-cell-10" @click="showScheme(scheme.id)">
+      <span class="link blue">Просмотреть</span></div>
+    <div class="table-cell-10" @click="editScheme(scheme.id)">
+      <span class="link blue">Изменить</span></div>
+    <div class="table-cell-10" @click="deleteScheme(scheme.id)">
+      <span class="link red">Удалить</span></div>
   </div>
     <NewEditScheme v-if="showSchema" :cur-schema="curSchema"/>
+    <button class="button-primary" @click="createUpdateSchema">Создать схему</button>
     </div>
     </div>
 </template>
@@ -56,7 +61,8 @@ export default defineComponent({
       this.showSchema = true;
     },
     deleteScheme(id:number) {
-      alert(id);
+      console.log(id);// для избежания ошибки
+      // предполагается метод удаления, но его нет в апи
     },
     update() {
       this.updateScheme();
@@ -72,6 +78,9 @@ export default defineComponent({
   &-row{
     width:100%;
     display: flex;
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 1px;
   }
   &-cell{
     &-80{

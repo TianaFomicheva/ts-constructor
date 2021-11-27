@@ -23,11 +23,35 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background: #E5E5E5;
 }
 .container{
   max-width: 1120px;
   margin: 0 auto;
-  padding:20px;
+}
+.button{
+  &-primary{
+    margin-top: 20px;
+    display: block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    border: 1px solid #1390E5;
+    -webkit-appearance: none;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    transition: .1s;
+    font-weight: 500;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    background: #1390E5;
+    color: #fff;
+  }
 }
 .dotted{
   padding-top:20px;
@@ -35,7 +59,6 @@ export default defineComponent({
   border-bottom: 1px dotted rgb(192, 191, 191);
 }
 #nav {
-  padding: 30px;
 
   a {
     font-weight: bold;
@@ -45,5 +68,17 @@ export default defineComponent({
       color: #1390E5;
     }
   }
+}
+.layout{
+  padding: 20px;
+}
+.left{
+  text-align: left;
+}
+.blue{
+  color: #1390E5;
+}
+.color{
+  color: red
 }
 </style>
