@@ -14,9 +14,10 @@ export default createStore({
   actions: {
     async createScheme({ commit }, payload: any) {
       const token = localStorage.getItem('token');
+      console.log(payload);
       if (token) {
         try {
-          const res:any = await axios.post(`${api}form`, { schema: payload }, {
+          const res:any = await axios.post(`${api}form`, { schema: payload.schemaVal }, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -31,7 +32,6 @@ export default createStore({
     },
     async updateScheme({ commit }, payload:any) {
       const { id, schemaVal } = payload;
-      console.log(commit);
       const token = localStorage.getItem('token');
       if (token) {
         try {

@@ -9,7 +9,7 @@
   <div class="form-column dotted">
   <div class="w-422">
   <button class="form-button"
-  @click="createItem">Добавить новое свойство {{properties.length}}</button>
+  @click="createItem">Добавить новое свойство</button>
   </div>
   </div>
    <div class="form-column">
@@ -31,7 +31,7 @@ type propertyType = {
 };
 type schemaObjType = {
   properties: Array<propertyType>,
-  schemaName: 'sctring',
+  schemaName: 'string',
 };
 type schemaType = {
   schema: schemaObjType,
@@ -54,7 +54,6 @@ export default defineComponent({
       const emptyObj = {} as propertyType;
       this.properties.push(emptyObj);
     }
-    console.log(this.curSchema?.schema.schemaName);
     if (this.curSchema) {
       this.assignPropValues(this.curSchema.schema);
     }
@@ -81,10 +80,8 @@ export default defineComponent({
         this.properties.splice(index, 1, item);
       } else {
         const index2 = this.properties.findIndex((itm: any) => !itm.key);
-        console.log(index2);
         this.properties.splice(index2, 1, item);
       }
-      console.log(this.properties);
     },
     createItem() {
       const emptyObj = {} as propertyType;
@@ -92,10 +89,12 @@ export default defineComponent({
     },
     createUpdateSchema() {
       if (this.curSchema?.id) {
-        console.log({ name: this.schemaName, properties: this.properties });
+        console.log(this.curSchema);
         this.updateScheme({ id: this.curSchema.id, schemaVal: this.curSchema });
       } else {
-        // this.createScheme(this.property);
+        this.createScheme(
+          { schemaVal: { schemaName: this.schemaName, properties: this.properties } },
+        );
       }
     },
   },
