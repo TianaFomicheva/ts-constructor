@@ -17,20 +17,26 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+body{
+background: #FAFAFA;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background: #E5E5E5;
 }
 .container{
   max-width: 1120px;
   margin: 0 auto;
 }
+.title{
+  font-size: 28px;
+  font-weight: bold;
+}
 .button{
-  &-primary{
+  &-primary, &-plain{
     margin-top: 20px;
     display: block;
     line-height: 1;
@@ -49,8 +55,15 @@ export default defineComponent({
     padding: 12px;
     font-size: 14px;
     border-radius: 4px;
+  }
+  &-primary{
     background: #1390E5;
     color: #fff;
+  }
+  &-plain{
+    background: transparent;
+    color: #1390E5;
+    border: 1px solid #1390E5;
   }
 }
 .dotted{

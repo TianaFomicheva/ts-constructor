@@ -1,7 +1,7 @@
 <template>
     <div class="container">
     <div class="layout">
-      <!-- <button @click="update">Update</button> -->
+      <h1 class="title left">Мои схемы</h1>
 <div v-for="scheme in schemes" :key="scheme.key" class="table-row">
     <div class="table-cell-80 left"> {{ scheme.schema.schemaName}}</div>
     <div class="table-cell-10" @click="showScheme(scheme.id)">

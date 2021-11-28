@@ -1,21 +1,22 @@
 <template>
+<h1 class="title left">Новая схема</h1>
 <div class="dotted">
-  <label>Название схемы
+  <label><span class="red">*</span> Название схемы
   <input v-model="schemaName" />
   </label>
 </div>
-  <property-form v-for="(item, index) in properties"
-  :key = index @set-prop-item="setPropertyItem" :property="item" />
-  <div class="form-column dotted">
-  <div class="w-422">
-  <button class="form-button"
+<h2>Свойства схемы</h2>
+<p>Схема должна содержать хотя бы одно свойство</p>
+<div class="form-layout dotted">
+  <div v-for="(item, index) in properties" :key ="index">
+  <property-form
+   @set-prop-item="setPropertyItem" :property="item" :idx="+index+1" />
+  </div>
+  </div>
+  <div class="action-buttons">
+  <button class="button-plain"
   @click="createItem">Добавить новое свойство</button>
-  </div>
-  </div>
-   <div class="form-column">
-  <div class="w-422">
-     <button class="form-button" @click="createUpdateSchema">{{ createButtonText }}</button>
-  </div>
+     <button class="button-primary" @click="createUpdateSchema">{{ createButtonText }}</button>
   </div>
 </template>
 
@@ -101,14 +102,26 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+
+.action{
+  &-buttons{
+    display: flex;
+    justify-content: space-between;
+  }
+}
 .w-422{
   width:422px;
   display: inline-block;
 }
 .form{
+  &-layout{
+    background: #fff;
+    padding: 15px;
+  }
     &-column{
-      width:50%
+      width:50%;
+      display: inline-block;
     }
   &-button{
     display: block;
@@ -133,4 +146,24 @@ export default defineComponent({
     border-radius: 4px;
   }
 }
+ input,
+  select {
+    width:100%;
+    display: block;
+    -webkit-appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+    box-sizing: border-box;
+    color: #606266;
+    display: block;
+    font-size: inherit;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    padding: 0 15px;
+    position: relative;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+  }
 </style>

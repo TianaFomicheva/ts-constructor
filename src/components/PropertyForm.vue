@@ -1,22 +1,23 @@
 <template>
   <form class="form-column">
+    <h2>Свойство {{ idx }}</h2>
     <div class="form-field">
       <label
-        ><span class="red">*</span>Ключ свойства
+        ><span class="red">*</span> Ключ свойства
         <input v-model="item.key" :key="item.key"
         placeholder="Укажите ключ свойства" @input="setValue($event, 'key')"/>
       </label>
     </div>
     <div class="form-field">
       <label
-        ><span class="red">*</span>Название свойства
+        ><span class="red">*</span> Название свойства
         <input v-model="item.name"
         placeholder="Укажите название свойства" @input="setValue($event, 'name')"/>
       </label>
     </div>
     <div class="form-field">
       <label
-        ><span class="red">*</span>Поле для отображения
+        ><span class="red">*</span> Поле для отображения
         <div>
         <select v-model="item.fieldType" @change="setValue($event, 'fieldType')">
           <option disabled selected>Выберите поле для отображения</option>
@@ -32,10 +33,14 @@
       </label>
     </div>
   </form>
+  <form class="form-column">
+ <validation />
+  </form>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
+import Validation from './Validation.vue';
 
 type propertyType = {
   key: 'string',
@@ -45,11 +50,18 @@ type propertyType = {
 
 export default defineComponent({
   name: 'property-form',
+  components: {
+    Validation,
+  },
   data() {
     return { item: { key: '', name: '', fieldType: '' } };
   },
   props: {
     property: Object as PropType<propertyType>,
+    idx: {
+      type: Number,
+      required: true,
+    },
   },
   mounted() {
     this.assignPropValues(this.property);
@@ -84,11 +96,27 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" >
-// form {
+<style lang="scss" scoped >
+h2{
+  margin-left: 10px;
+  position: relative;
+  &:before{
+      content: '';
+      width:0;
+      height:0;
+      position: absolute;
+      left: -10px;
+      top: 10px;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      z-index: 9999999;
+      border-top: 4px solid rgb(36, 39, 36);
+  }
+}
   .form {
     &-column{
-      width:50%
+      width:50%;
+      display: inline-block;
     }
     &-field {
       margin: 5px;
@@ -96,6 +124,7 @@ export default defineComponent({
       position: relative;
       font-size: 14px;
       display: inline-block;
+      margin-left: 15px;
     }
   }
   label {
