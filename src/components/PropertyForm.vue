@@ -1,6 +1,13 @@
 <template>
-  <form class="form-column">
-    <h2>Свойство {{ idx }}</h2>
+<div class="flex">
+  <div>
+    <div class="collapse" @click="togglePropertyVisibility">
+      <span class="arrow arrow-button"></span></div><h2>Свойство {{ idx }}
+        </h2></div>
+        <font-awesome-icon icon="trash"/>
+        </div>
+      <div  v-if="propertyVisibility">
+    <form class="form-column">
     <div class="form-field">
       <label
         ><span class="red">*</span> Ключ свойства
@@ -28,14 +35,15 @@
           <option value="phone">Номер телефона</option>
           <option value="dropdown">Выпадающий список</option>
         </select>
-         <div class="arrow-down"></div>
+         <div class="arrow arrow-select" @click="togglePropertyVisibility"></div>
         </div>
       </label>
     </div>
-  </form>
-  <form class="form-column">
- <validation />
-  </form>
+    </form>
+    <form class="form-column">
+ <validation v-if="item.fieldType" :field-type="item.fieldType" />
+    </form>
+  </div>
 </template>
 
 <script lang="ts">
@@ -54,7 +62,7 @@ export default defineComponent({
     Validation,
   },
   data() {
-    return { item: { key: '', name: '', fieldType: '' } };
+    return { item: { key: '', name: '', fieldType: '' }, propertyVisibility: true };
   },
   props: {
     property: Object as PropType<propertyType>,
@@ -86,11 +94,13 @@ export default defineComponent({
         default:
           break;
       }
-      // console.log(this.item);
       if (this.item.fieldType && this.item.name && this.item.key) {
         console.log(this.item);
         this.$emit('set-prop-item', this.item);
       }
+    },
+    togglePropertyVisibility() {
+      this.propertyVisibility = !this.propertyVisibility;
     },
   },
 });
@@ -100,18 +110,7 @@ export default defineComponent({
 h2{
   margin-left: 10px;
   position: relative;
-  &:before{
-      content: '';
-      width:0;
-      height:0;
-      position: absolute;
-      left: -10px;
-      top: 10px;
-      border-left: 4px solid transparent;
-      border-right: 4px solid transparent;
-      z-index: 9999999;
-      border-top: 4px solid rgb(36, 39, 36);
-  }
+  display: inline-block;
 }
   .form {
     &-column{
@@ -155,21 +154,35 @@ h2{
     position: relative;
     transition: border-color .2s cubic-bezier(.645,.045,.355,1);
   }
-  .arrow-down{
+  .arrow{
       content: '';
       width:0;
       height:0;
       position: absolute;
-      right: 10px;
-      top: 40px;
       border-left: 4px solid transparent;
       border-right: 4px solid transparent;
       z-index: 9999999;
       border-top: 4px solid rgb(36, 39, 36);
       cursor: pointer;
+      &-button{
+        left:3px;
+        bottom:5px;
+      }
+      &-select{
+        right: 10px;
+        top: 40px;
+      }
     }
 // }
 .red {
   color: red;
+}
+.collapse{
+  position: relative;
+  display: inline-block;
+  width: 12px;
+}
+.fa-trash{
+  color:grey;
 }
 </style>

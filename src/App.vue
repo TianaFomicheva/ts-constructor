@@ -91,9 +91,10 @@ background: #FAFAFA;
 .flex{
   display: flex;
   align-items: center;
-}
-.space-between{
   justify-content: space-between;
+}
+.start{
+  justify-content: start;
 }
 .blue{
   color: #1390E5;
