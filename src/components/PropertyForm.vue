@@ -96,7 +96,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped >
+<style lang="scss" >
 h2{
   margin-left: 10px;
   position: relative;
@@ -117,6 +117,7 @@ h2{
     &-column{
       width:50%;
       display: inline-block;
+      vertical-align: top;
     }
     &-field {
       margin: 5px;

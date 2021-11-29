@@ -88,6 +88,13 @@ background: #FAFAFA;
 .left{
   text-align: left;
 }
+.flex{
+  display: flex;
+  align-items: center;
+}
+.space-between{
+  justify-content: space-between;
+}
 .blue{
   color: #1390E5;
 }

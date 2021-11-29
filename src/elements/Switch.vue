@@ -1,4 +1,5 @@
 <template>
+<div class="flex">
   <div class="right list-item__right">
       <div input-id="switch1" class="switch" style="touch-action: pan-y;
       -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
@@ -10,6 +11,8 @@
       </div>
     </div>
   </div>
+  <div class="label-right"> Обязательно для заполнения</div>
+</div>
 </template>
 
 <script lang="ts">
@@ -30,13 +33,10 @@ export default defineComponent({
     position: relative;
     min-width: 51px;
     font-size: 17px;
-    font-size: 17px;
     padding: 0 20px;
     border: none;
     overflow: visible;
     width: 51px;
-    width: 51px;
-    height: 32px;
     height: 32px;
     z-index: 0;
     text-align: left;
@@ -49,7 +49,6 @@ export default defineComponent({
       padding: 0;
       border: 0;
       background-color: transparent;
-      z-index: 1;
       vertical-align: top;
       outline: none;
       width: 100%;
@@ -112,17 +111,14 @@ export default defineComponent({
 
 .list-item__right{
     box-sizing: border-box;
-    display: -webkit-flex;
-    display: flex;
-    margin-left: auto;
-    padding: 12px 12px 12px 0;
-    -webkit-order: 2;
-    order: 2;
-    -webkit-align-items: center;
+    padding: 8px 12px 8px 0;
     align-items: center;
     -webkit-align-self: stretch;
     background-size: 100% 1px;
     background-repeat: no-repeat;
     background-position: bottom;
+}
+.label-right{
+  display: inline-block;
 }
 </style>
