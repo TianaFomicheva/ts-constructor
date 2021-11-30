@@ -7,7 +7,7 @@
     <input class="switch__input" type="checkbox" ref="switchInput" :checked="isChecked" />
     <div class="switch__toggle">
       <div class="switch__handle">
-        <div class="switch__touch"></div>
+        <div class="switch__touch" @click.stop="doNothing"></div>
       </div>
       </div>
     </div>
@@ -25,6 +25,9 @@ export default defineComponent({
     return { isChecked: false };
   },
   methods: {
+    doNoting() {
+      return false;
+    },
     toggleRequired() {
       this.isChecked = !this.isChecked;
       this.$emit('toggle-required');

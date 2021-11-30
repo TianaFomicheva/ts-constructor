@@ -1,13 +1,11 @@
 <template>
-<div class="flex">
-  <div>
+  <div class="form-layout">
+<div class="form-column">
     <div class="collapse" @click="togglePropertyVisibility">
       <span class="arrow arrow-button"></span></div><h2>Свойство {{ idx }}
-        </h2></div>
+        </h2>
         <font-awesome-icon icon="trash"/>
-        </div>
-      <div  v-if="propertyVisibility">
-    <form class="form-column">
+    <div v-if="propertyVisibility">
     <div class="form-field">
       <label
         ><span class="red">*</span> Ключ свойства
@@ -39,10 +37,12 @@
         </div>
       </label>
     </div>
-    </form>
-    <form class="form-column">
- <validation v-if="item.fieldType" :field-type="item.fieldType" />
-    </form>
+    </div>
+    </div>
+    <div class="form-column">
+     <validation v-if="item.fieldType" :field-type="item.fieldType"
+     @set-validation-vals="setValidationVals"/>
+    </div>
   </div>
 </template>
 
@@ -80,6 +80,11 @@ export default defineComponent({
       this.item.name = property?.name;
       this.item.fieldType = property?.fieldType;
     },
+    setValidationVals(item:any) {
+      console.log(item);
+      const newVar = { ...this.item, ...item };
+      console.log(newVar);
+    },
     setValue(event: any, itemProp: string) {
       switch (itemProp) {
         case 'key':
@@ -113,6 +118,11 @@ h2{
   display: inline-block;
 }
   .form {
+    &-layout{
+    background: #fff;
+    padding: 15px;
+    position: relative;
+  }
     &-column{
       width:50%;
       display: inline-block;
@@ -184,5 +194,8 @@ h2{
 }
 .fa-trash{
   color:grey;
+  position: absolute;
+  top:30px;
+  right:15px;
 }
 </style>

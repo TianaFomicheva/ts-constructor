@@ -7,7 +7,7 @@
 </div>
 <h2>Свойства схемы</h2>
 <p>Схема должна содержать хотя бы одно свойство</p>
-<div class="form-layout dotted">
+<div class="dotted">
   <div v-for="(item, index) in properties" :key ="index">
   <property-form
    @set-prop-item="setPropertyItem" :property="item" :idx="+index+1" />
@@ -115,10 +115,6 @@ export default defineComponent({
   display: inline-block;
 }
 .form{
-  &-layout{
-    background: #fff;
-    padding: 15px;
-  }
     &-column{
       width:50%;
       display: inline-block;
