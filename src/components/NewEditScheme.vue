@@ -6,11 +6,12 @@
   </label>
 </div>
 <h2>Свойства схемы</h2>
-<p>Схема должна содержать хотя бы одно свойство</p>
+<p :class="{'red': deleteErr}">Схема должна содержать хотя бы одно свойство</p>
 <div class="dotted">
-  <div v-for="(item, index) in properties" :key ="index">
+  <div v-for="(item, index) in properties" :key ="index" >
   <property-form
-   @set-prop-item="setPropertyItem" :property="item" :idx="+index+1" />
+  @set-prop-item="setPropertyItem" :property="item" :idx="+index+1"
+  @delete-property="deleteProperty" />
   </div>
   </div>
   <div class="action-buttons">
@@ -43,7 +44,7 @@ export default defineComponent({
   components: { PropertyForm },
   name: 'new-edit-scheme',
   data() {
-    return { properties: Array<propertyType>(), schemaName: '' };
+    return { properties: Array<propertyType>(), schemaName: '', deleteErr: false };
   },
   props: {
     curSchema: {
@@ -72,11 +73,9 @@ export default defineComponent({
     },
     ...mapActions(['createScheme', 'updateScheme']),
     setPropertyItem(item: any) {
-      // console.log(item);
       const index = this.properties.findIndex((itm: any) => itm.key === item.key);
       const index1 = this.properties.findIndex((itm: any) => itm.name === item.name);
       const ind = Math.max(index, index1);
-      console.log(ind);
       if (ind !== -1) {
         this.properties.splice(index, 1, item);
       } else {
@@ -87,6 +86,13 @@ export default defineComponent({
     createItem() {
       const emptyObj = {} as propertyType;
       this.properties.push(emptyObj);
+    },
+    deleteProperty(idx:number) {
+      if (this.properties.length > 1) {
+        this.properties.splice(idx - 1, 1);
+      } else {
+        this.deleteErr = true;
+      }
     },
     createUpdateSchema() {
       if (this.curSchema?.id) {

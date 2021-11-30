@@ -4,7 +4,7 @@
     <div class="collapse" @click="togglePropertyVisibility">
       <span class="arrow arrow-button"></span></div><h2>Свойство {{ idx }}
         </h2>
-        <font-awesome-icon icon="trash"/>
+        <font-awesome-icon icon="trash" @click="deleteProperty(idx)"/>
     <div v-if="propertyVisibility">
     <div class="form-field">
       <label
@@ -70,6 +70,10 @@ export default defineComponent({
       type: Number,
       required: true,
     },
+    count: {
+      type: Number,
+      required: true,
+    },
   },
   mounted() {
     this.assignPropValues(this.property);
@@ -100,12 +104,14 @@ export default defineComponent({
           break;
       }
       if (this.item.fieldType && this.item.name && this.item.key) {
-        console.log(this.item);
         this.$emit('set-prop-item', this.item);
       }
     },
     togglePropertyVisibility() {
       this.propertyVisibility = !this.propertyVisibility;
+    },
+    deleteProperty(idx: number) {
+      this.$emit('delete-property', idx);
     },
   },
 });
