@@ -99,7 +99,4 @@ background: #FAFAFA;
 .blue{
   color: #1390E5;
 }
-.color{
-  color: red
-}
 </style>

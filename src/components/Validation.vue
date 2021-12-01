@@ -30,10 +30,8 @@ export default defineComponent({
   props: {
     fieldType: {
       type: String,
+      default: '',
     },
-  },
-  mounted() {
-    console.log(this.fieldType);
   },
   computed: {
     validateMinMax() {

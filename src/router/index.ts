@@ -18,7 +18,13 @@ const routes: Array<routeParams> = [
   {
     path: '/new',
     name: 'New',
-    component: () => import(/* webpackChunkName: "about" */ '../views/NewScheme.vue'),
+    component: () => import('../views/NewScheme.vue'),
+
+  },
+  {
+    path: '/show/:id',
+    name: 'Show',
+    component: () => import('../views/Show.vue'),
 
   },
 ];

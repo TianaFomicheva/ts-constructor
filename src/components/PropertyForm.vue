@@ -85,9 +85,10 @@ export default defineComponent({
       this.item.fieldType = property?.fieldType;
     },
     setValidationVals(item:any) {
-      console.log(item);
+      console.log(this.item);
       const newVar = { ...this.item, ...item };
       console.log(newVar);
+      return newVar;
     },
     setValue(event: any, itemProp: string) {
       switch (itemProp) {

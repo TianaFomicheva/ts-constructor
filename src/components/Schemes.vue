@@ -52,13 +52,13 @@ export default defineComponent({
   },
   methods: {
     ...mapActions(['getSchemes', 'getScheme', 'updateScheme']),
-    showScheme(id:number) {
-      alert(id);
-    },
     async editScheme(id:number) {
       const curScheme = await this.getScheme(id);
       this.curSchema = curScheme;
       this.showSchema = true;
+    },
+    showScheme(id:number) {
+      this.$router.push(`/show/${id}`);
     },
     deleteScheme(id:number) {
       console.log(id);// для избежания ошибки

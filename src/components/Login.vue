@@ -34,7 +34,6 @@ export default defineComponent({
       this.signUp({ username: this.register_username, password: this.register_password });
     },
     auth() {
-      console.log(this.auth_username);
       this.login({ username: this.auth_username, password: this.auth_password });
     },
   },
