@@ -24,6 +24,15 @@ export default defineComponent({
   data() {
     return { isChecked: false };
   },
+  props: {
+    propVal: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  mounted() {
+    this.isChecked = this.propVal;
+  },
   methods: {
     doNoting() {
       return false;

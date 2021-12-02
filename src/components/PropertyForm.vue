@@ -41,6 +41,7 @@
     </div>
     <div class="form-column">
      <validation v-if="item.fieldType" :field-type="item.fieldType"
+     :cur-valid-params="{...validation}"
      @set-required="setRequired"
      @set-min-val="seMinVal"
      @set-max-val="seMaxVal"
@@ -93,6 +94,10 @@ export default defineComponent({
       this.item.key = property?.key;
       this.item.name = property?.name;
       this.item.fieldType = property?.fieldType;
+      this.validation.isRequired = property?.isRequired;
+      this.validation.minVal = property?.minVal;
+      this.validation.maxVal = property?.maxVal;
+      this.validation.regExp = property?.regExp;
     },
     setRequired(val: any) {
       this.validation.isRequired = val;

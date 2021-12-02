@@ -2,14 +2,17 @@
 <div class="container form-layout">
   <h1 class="title left">{{curSchema?.schema?.schemaName }}</h1>
   <div v-for="(property, idx) in curSchema?.schema?.properties" :key="idx">
-    <div class="form-field__show"><span v-if="property.isRequired" class="red">* </span>
-    <label class="left" :class="{'red': property.isErr }">{{property.name}} </label>
+    <div class="form-field__show">
+      <label class="left" :class="{'red': property.isErr }">
+        <span v-if="property.isRequired" class="red">* </span>
+      {{property.name}} </label>
       <input :ref="`field_${idx}`"
       v-if="property.fieldType !=='dropdown' && property.fieldType !=='phone'"
       :class="{'red-bordered': property.isErr}"
       :key="property.isErr" />
-      <input v-else-if="property.fieldType =='phone'" v-maska="'+7(###) ###-####'"  />
-      <select v-else></select>
+      <input v-else-if="property.fieldType =='phone'" :ref="`field_${idx}`"
+      v-maska="'+7(###) ###-####'"  />
+      <select v-else :ref="`field_${idx}`"></select>
     </div>
     </div>
      <button class="button-primary" @click="validate">Валидация</button>

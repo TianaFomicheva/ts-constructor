@@ -1,12 +1,13 @@
 <template>
 <h3 class="title">Валидация</h3>
 <div class="form-field">
-    <Switch @toggle-required="toggleRequired" />
+    <Switch @toggle-required="toggleRequired" :prop-val="curValidParams.isRequired"/>
 </div>
 <div class="form-field">
-    <MinMax v-if="validateMinMax" @set-min="setMin" @set-max="setMax" />
+    <MinMax v-if="validateMinMax" @set-min="setMin" @set-max="setMax"
+    :prop-val="{'min': curValidParams.minVal, 'max': curValidParams.maxVal}"/>
 </div>
-    <RegExp v-if="validateRegExp" @set-reg-exp="setRegExp"/>
+    <RegExp v-if="validateRegExp" @set-reg-exp="setRegExp" :prop-val="curValidParams.regExp" />
 </template>
 
 <script lang="ts">
@@ -32,6 +33,12 @@ export default defineComponent({
       type: String,
       default: '',
     },
+    curValidParams: {
+      type: Object,
+    },
+  },
+  mounted() {
+    console.log(this.curValidParams);
   },
   computed: {
     validateMinMax() {
