@@ -1,6 +1,6 @@
 <template>
 <div class="flex start">
-  <div class="right list-item__right">
+  <div class="switch-wrapper">
       <div input-id="switch1" class="switch" style="touch-action: pan-y;
       -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"
       @click="toggleRequired">
@@ -49,6 +49,15 @@ export default defineComponent({
 <style lang="scss">
 
 .switch{
+  &-wrapper{
+    box-sizing: border-box;
+    padding: 8px 12px 8px 0;
+    align-items: center;
+    -webkit-align-self: stretch;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
     display: inline-block;
     vertical-align: top;
     box-sizing: border-box;
@@ -126,15 +135,6 @@ export default defineComponent({
     box-shadow: 0 3px 2px rgba(0, 0, 0,0.25);
 }
 
-.list-item__right{
-    box-sizing: border-box;
-    padding: 8px 12px 8px 0;
-    align-items: center;
-    -webkit-align-self: stretch;
-    background-size: 100% 1px;
-    background-repeat: no-repeat;
-    background-position: bottom;
-}
 .label-right{
   display: inline-block;
 }

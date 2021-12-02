@@ -40,8 +40,6 @@ type schemaType = {
   id: number,
 }
 
-// interface ValidPropertyType extends propertyType { data: {} }
-
 export default defineComponent({
   components: { PropertyForm },
   name: 'new-edit-scheme',
@@ -97,12 +95,11 @@ export default defineComponent({
       }
     },
     createUpdateSchema() {
-      console.log(this.properties);
       if (this.curSchema?.id) {
         this.updateScheme({ id: this.curSchema.id, schemaVal: this.curSchema });
       } else {
         this.createScheme(
-          // { schemaVal: { schemaName: this.schemaName, properties: this.properties } },
+          { schemaVal: { schemaName: this.schemaName, properties: this.properties } },
         );
       }
     },
@@ -122,52 +119,5 @@ export default defineComponent({
   width:422px;
   display: inline-block;
 }
-.form{
-    &-column{
-      width:50%;
-      display: inline-block;
-    }
-  &-button{
-    display: block;
-    line-height: 1;
-    white-space: nowrap;
-    cursor: pointer;
-    background: #fff;
-    border: 1px solid #1390E5;
-    color: #1390E5;
-    -webkit-appearance: none;
-    text-align: center;
-    box-sizing: border-box;
-    outline: none;
-    margin: 0;
-    transition: .1s;
-    font-weight: 500;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    padding: 12px;
-    font-size: 14px;
-    border-radius: 4px;
-  }
-}
- input,
-  select {
-    width:100%;
-    display: block;
-    -webkit-appearance: none;
-    background-color: #fff;
-    background-image: none;
-    border-radius: 4px;
-    border: 1px solid #dcdfe6;
-    box-sizing: border-box;
-    color: #606266;
-    display: block;
-    font-size: inherit;
-    height: 40px;
-    line-height: 40px;
-    outline: none;
-    padding: 0 15px;
-    position: relative;
-    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-  }
+
 </style>

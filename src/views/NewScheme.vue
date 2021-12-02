@@ -20,8 +20,5 @@ export default defineComponent({
 </script>
 
 <style>
-.layout
-{
-  text-align: left;
-}
+
 </style>

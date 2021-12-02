@@ -142,59 +142,17 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" >
+<style lang="scss" scoped>
 h2{
   margin-left: 10px;
   position: relative;
   display: inline-block;
 }
-  .form {
-    &-layout{
-    background: #fff;
-    padding: 15px;
-    position: relative;
+.form{
+  &-layout{
+    display: flex;
   }
-    &-column{
-      width:50%;
-      display: inline-block;
-      vertical-align: top;
-    }
-    &-field {
-      margin: 5px;
-      width: 422px;
-      position: relative;
-      font-size: 14px;
-      display: inline-block;
-      margin-left: 15px;
-    }
-  }
-  label {
-    display: block;
-    font-size: 16px;
-    line-height: 22px;
-    font-weight: bold;
-    text-align: left;
-  }
-  input,
-  select {
-    width:100%;
-    display: block;
-    -webkit-appearance: none;
-    background-color: #fff;
-    background-image: none;
-    border-radius: 4px;
-    border: 1px solid #dcdfe6;
-    box-sizing: border-box;
-    color: #606266;
-    display: block;
-    font-size: inherit;
-    height: 40px;
-    line-height: 40px;
-    outline: none;
-    padding: 0 15px;
-    position: relative;
-    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-  }
+}
   .arrow{
       content: '';
       width:0;
@@ -214,10 +172,6 @@ h2{
         top: 40px;
       }
     }
-// }
-.red {
-  color: red;
-}
 .collapse{
   position: relative;
   display: inline-block;

@@ -6,7 +6,8 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Header from '@/components/Header.vue'; // @ is an alias to /src
+import Header from '@/components/Header.vue';
+import '@/assets/form.scss';
 
 export default defineComponent({
   name: 'Home',
@@ -83,6 +84,7 @@ background: #FAFAFA;
   }
 }
 .layout{
+  text-align: left;
   padding: 20px;
 }
 .left{
@@ -98,5 +100,8 @@ background: #FAFAFA;
 }
 .blue{
   color: #1390E5;
+}
+.red{
+  color: red;
 }
 </style>
