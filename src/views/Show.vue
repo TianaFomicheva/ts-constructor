@@ -4,11 +4,12 @@
   <div v-for="(property, idx) in curSchema?.schema?.properties" :key="idx">
     <div class="form-field__show"><span v-if="property.isRequired" class="red">* </span>
     <label class="left" :class="{'red': property.isErr }">{{property.name}} </label>
-      <input :ref="`field_${idx}`" v-if="property.fieldType !=='dropdown'"
+      <input :ref="`field_${idx}`"
+      v-if="property.fieldType !=='dropdown' && property.fieldType !=='phone'"
       :class="{'red-bordered': property.isErr}"
       :key="property.isErr" />
+      <input v-else-if="property.fieldType =='phone'" v-maska="'+7(###) ###-####'"  />
       <select v-else></select>
-      <input v-maska="'+7(###) ###-#####'" placeholder="Phone" />
     </div>
     </div>
      <button class="button-primary" @click="validate">Валидация</button>
@@ -44,7 +45,7 @@ export default defineComponent({
         const itemField:any = this.$refs[`field_${ind}`];
         const err = { isErr: true };
         if (item.isRequired) {
-          if (itemField.value === '') {
+          if (itemField.value === '' || (item.fieldType === 'phone' && itemField.value.length < 10)) {
             return { ...item, ...err };
           }
         }

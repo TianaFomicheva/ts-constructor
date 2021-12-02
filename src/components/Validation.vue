@@ -44,36 +44,19 @@ export default defineComponent({
   methods: {
     toggleRequired() {
       this.isRequired = !this.isRequired;
-      this.$emit('is-required', this.isRequired);
-      this.setValidationVals();
+      this.$emit('set-required', this.isRequired);
     },
     setMin(val:string) {
       this.minVal = val !== '' ? +val : 0;
-      this.setValidationVals();
+      this.$emit('set-min-val', this.minVal);
     },
     setMax(val:string) {
       this.maxVal = val !== '' ? +val : 0;
-      this.setValidationVals();
+      this.$emit('set-max-val', this.maxVal);
     },
     setRegExp(val:string) {
       this.regExp = val;
-      this.setValidationVals();
-    },
-    setValidationVals() {
-      const item = {} as any;
-      if (this.isRequired) {
-        item.isRequired = true;
-      }
-      if (this.minVal > 0) {
-        item.minVal = this.minVal;
-      }
-      if (this.maxVal > 0) {
-        item.maxVal = this.maxVal;
-      }
-      if (this.regExp !== '') {
-        item.regExp = this.regExp;
-      }
-      this.$emit('set-validation-vals', item);
+      this.$emit('set-reg-exp', this.regExp);
     },
   },
 });

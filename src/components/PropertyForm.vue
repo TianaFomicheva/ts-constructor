@@ -9,22 +9,22 @@
     <div class="form-field">
       <label
         ><span class="red">*</span> Ключ свойства
-        <input v-model="item.key" :key="item.key"
-        placeholder="Укажите ключ свойства" @input="setValue($event, 'key')"/>
+        <input v-model="item.key"
+        placeholder="Укажите ключ свойства" @input.stop="setValue($event, 'key')"/>
       </label>
     </div>
     <div class="form-field">
       <label
         ><span class="red">*</span> Название свойства
         <input v-model="item.name"
-        placeholder="Укажите название свойства" @input="setValue($event, 'name')"/>
+        placeholder="Укажите название свойства" @input.stop="setValue($event, 'name')"/>
       </label>
     </div>
     <div class="form-field">
       <label
         ><span class="red">*</span> Поле для отображения
         <div>
-        <select v-model="item.fieldType" @change="setValue($event, 'fieldType')">
+        <select v-model="item.fieldType" @change.stop="setValue($event, 'fieldType')">
           <option disabled selected>Выберите поле для отображения</option>
           <option value="text">Текстовое поле</option>
           <option value="number">Числовое поле</option>
@@ -41,7 +41,11 @@
     </div>
     <div class="form-column">
      <validation v-if="item.fieldType" :field-type="item.fieldType"
-     @set-validation-vals="setValidationVals"/>
+     @set-required="setRequired"
+     @set-min-val="seMinVal"
+     @set-max-val="seMaxVal"
+     @set-reg-exp="setRegExp"
+     />
     </div>
   </div>
 </template>
@@ -62,7 +66,12 @@ export default defineComponent({
     Validation,
   },
   data() {
-    return { item: { key: '', name: '', fieldType: '' }, propertyVisibility: true };
+    return {
+      item: { key: '', name: '', fieldType: '' },
+      propertyVisibility: true,
+      validation: {} as any,
+      fullItem: {} as any,
+    };
   },
   props: {
     property: Object as PropType<propertyType>,
@@ -78,17 +87,27 @@ export default defineComponent({
   mounted() {
     this.assignPropValues(this.property);
   },
+
   methods: {
     assignPropValues(property: any) {
       this.item.key = property?.key;
       this.item.name = property?.name;
       this.item.fieldType = property?.fieldType;
     },
-    setValidationVals(item:any) {
-      console.log(this.item);
-      const newVar = { ...this.item, ...item };
-      console.log(newVar);
-      return newVar;
+    setRequired(val: any) {
+      this.validation.isRequired = val;
+      this.setValue(false, '');
+    },
+    setMinVal(val: any) {
+      this.validation.minVal = val;
+      this.setValue(false, '');
+    },
+    setMaxVal(val: any) {
+      this.validation.maxVal = val;
+    },
+    setRegExp(val: any) {
+      this.validation.regExp = val;
+      this.setValue(false, '');
     },
     setValue(event: any, itemProp: string) {
       switch (itemProp) {
@@ -105,7 +124,7 @@ export default defineComponent({
           break;
       }
       if (this.item.fieldType && this.item.name && this.item.key) {
-        this.$emit('set-prop-item', this.item);
+        this.$emit('set-prop-item', { ...this.item, ...this.validation });
       }
     },
     togglePropertyVisibility() {

@@ -40,6 +40,8 @@ type schemaType = {
   id: number,
 }
 
+// interface ValidPropertyType extends propertyType { data: {} }
+
 export default defineComponent({
   components: { PropertyForm },
   name: 'new-edit-scheme',
@@ -95,12 +97,12 @@ export default defineComponent({
       }
     },
     createUpdateSchema() {
+      console.log(this.properties);
       if (this.curSchema?.id) {
-        console.log(this.curSchema);
         this.updateScheme({ id: this.curSchema.id, schemaVal: this.curSchema });
       } else {
         this.createScheme(
-          { schemaVal: { schemaName: this.schemaName, properties: this.properties } },
+          // { schemaVal: { schemaName: this.schemaName, properties: this.properties } },
         );
       }
     },
