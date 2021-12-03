@@ -1,8 +1,9 @@
 <template>
   <div class="form-field">
-      <label>Шаблон ввода
-      <input @input="setRegExp($event.target.value)"/>
-      </label>
+    <label
+      >Шаблон ввода
+      <input @input="setRegExp($event.target.value)" />
+    </label>
   </div>
 </template>
 
@@ -12,7 +13,7 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'reg-exp',
   methods: {
-    setRegExt(val:string) {
+    setRegExt(val: string) {
       this.$emit('set-reg-exp', val);
     },
   },
@@ -20,5 +21,4 @@ export default defineComponent({
 </script>
 
 <style>
-
 </style>

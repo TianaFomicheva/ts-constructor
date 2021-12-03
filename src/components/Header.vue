@@ -2,22 +2,24 @@
   <div class="header">
     <div class="container">
       <div class="header-links">
-      <div class="header-links__left">
-        <div class="header-link">
-        <router-link to="/"><img src="~@/assets/sibdev-logo.png" /></router-link>
+        <div class="header-links__left">
+          <div class="header-link">
+            <router-link to="/"
+              ><img src="~@/assets/sibdev-logo.png"
+            /></router-link>
+          </div>
+          <div class="header-link">
+            <router-link to="/">Мои схемы</router-link>
+          </div>
+          <div class="header-link">
+            <router-link to="/new">Создать новую схему</router-link>
+          </div>
         </div>
-        <div class="header-link">
-        <router-link to="/">Мои схемы</router-link>
+        <div class="header-links__right">
+          <div class="header-link">
+            <a @click="toLogout">Выйти</a>
+          </div>
         </div>
-        <div class="header-link">
-        <router-link to="/new">Создать новую схему</router-link>
-        </div>
-      </div>
-      <div class="header-links__right">
-        <div class="header-link">
-        <a @click="toLogout">Выйти</a>
-        </div>
-      </div>
       </div>
     </div>
   </div>
@@ -45,21 +47,21 @@ export default defineComponent({
   &-links {
     display: flex;
     justify-content: space-between;
-    &__left, &__right{
+    &__left,
+    &__right {
       display: flex;
       align-items: center;
     }
-
   }
-  &-link{
-    padding-left:10px;
-    padding-right:10px;
+  &-link {
+    padding-left: 10px;
+    padding-right: 10px;
     display: inline-block;
-    color: #1390E5;
+    color: #1390e5;
   }
-  & a{
+  & a {
     text-decoration: none;
-    color: #1390E5;
+    color: #1390e5;
   }
 }
 </style>

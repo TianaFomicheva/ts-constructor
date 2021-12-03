@@ -1,13 +1,12 @@
 <template>
   <div>
-    <Schemes   v-if="isLogged" />
-    <Login v-else @to-login="toLogin"/>
+    <Schemes v-if="isLogged" />
+    <Login v-else @to-login="toLogin" />
   </div>
 </template>
 
-<script lang="ts">
+<script lang='ts'>
 import { defineComponent } from 'vue';
-// import { mapGetters } from 'vuex';
 import Schemes from '@/components/Schemes.vue';
 import Login from '@/components/Login.vue';
 

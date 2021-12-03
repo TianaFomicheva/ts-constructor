@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="layout">
-    <new-edit-scheme />
+      <new-edit-scheme />
     </div>
   </div>
 </template>
@@ -14,11 +14,9 @@ export default defineComponent({
   name: 'new-scheme',
   components: {
     NewEditScheme,
-
   },
 });
 </script>
 
 <style>
-
 </style>

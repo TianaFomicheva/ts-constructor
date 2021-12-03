@@ -3,8 +3,8 @@ import Home from '../views/Home.vue';
 
 interface routeParams {
   path: string,
-    name: string,
-    component: any,
+  name: string,
+  component: any,
 }
 
 const routes: Array<routeParams> = [

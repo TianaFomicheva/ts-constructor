@@ -1,52 +1,67 @@
 <template>
   <div class="form-layout">
-<div class="form-column">
-    <div class="collapse" @click="togglePropertyVisibility">
-      <span class="arrow arrow-button"></span></div><h2>Свойство {{ idx }}
-        </h2>
-        <font-awesome-icon icon="trash" @click="deleteProperty(idx)"/>
-    <div v-if="propertyVisibility">
-    <div class="form-field">
-      <label
-        ><span class="red">*</span> Ключ свойства
-        <input v-model="item.key"
-        placeholder="Укажите ключ свойства" @input.stop="setValue($event, 'key')"/>
-      </label>
-    </div>
-    <div class="form-field">
-      <label
-        ><span class="red">*</span> Название свойства
-        <input v-model="item.name"
-        placeholder="Укажите название свойства" @input.stop="setValue($event, 'name')"/>
-      </label>
-    </div>
-    <div class="form-field">
-      <label
-        ><span class="red">*</span> Поле для отображения
-        <div>
-        <select v-model="item.fieldType" @change.stop="setValue($event, 'fieldType')">
-          <option disabled selected>Выберите поле для отображения</option>
-          <option value="text">Текстовое поле</option>
-          <option value="number">Числовое поле</option>
-          <option value="password">Пароль</option>
-          <option value="checkbox">Чекбокс</option>
-          <option value="phone">Номер телефона</option>
-          <option value="dropdown">Выпадающий список</option>
-        </select>
-         <div class="arrow arrow-select" @click="togglePropertyVisibility"></div>
+    <div class="form-column">
+      <div class="collapse" @click="togglePropertyVisibility">
+        <span class="arrow arrow-button"></span>
+      </div>
+      <h2>Свойство {{ idx }}</h2>
+      <font-awesome-icon icon="trash" @click="deleteProperty(idx)" />
+      <div v-if="propertyVisibility">
+        <div class="form-field">
+          <label
+            ><span class="red">*</span> Ключ свойства
+            <input
+              v-model="item.key"
+              placeholder="Укажите ключ свойства"
+              @input.stop="setValue($event, 'key')"
+            />
+          </label>
         </div>
-      </label>
-    </div>
-    </div>
+        <div class="form-field">
+          <label
+            ><span class="red">*</span> Название свойства
+            <input
+              v-model="item.name"
+              placeholder="Укажите название свойства"
+              @input.stop="setValue($event, 'name')"
+            />
+          </label>
+        </div>
+        <div class="form-field">
+          <label
+            ><span class="red">*</span> Поле для отображения
+            <div>
+              <select
+                v-model="item.fieldType"
+                @change.stop="setValue($event, 'fieldType')"
+              >
+                <option disabled selected>Выберите поле для отображения</option>
+                <option value="text">Текстовое поле</option>
+                <option value="number">Числовое поле</option>
+                <option value="password">Пароль</option>
+                <option value="checkbox">Чекбокс</option>
+                <option value="phone">Номер телефона</option>
+                <option value="dropdown">Выпадающий список</option>
+              </select>
+              <div
+                class="arrow arrow-select"
+                @click="togglePropertyVisibility"
+              ></div>
+            </div>
+          </label>
+        </div>
+      </div>
     </div>
     <div class="form-column">
-     <validation v-if="item.fieldType" :field-type="item.fieldType"
-     :cur-valid-params="{...validation}"
-     @set-required="setRequired"
-     @set-min-val="seMinVal"
-     @set-max-val="seMaxVal"
-     @set-reg-exp="setRegExp"
-     />
+      <validation
+        v-if="item.fieldType"
+        :field-type="item.fieldType"
+        :cur-valid-params="{ ...validation }"
+        @set-required="setRequired"
+        @set-min-val="seMinVal"
+        @set-max-val="seMaxVal"
+        @set-reg-exp="setRegExp"
+      />
     </div>
   </div>
 </template>
@@ -56,10 +71,10 @@ import { defineComponent, PropType } from 'vue';
 import Validation from './Validation.vue';
 
 type propertyType = {
-  key: 'string',
-  name: 'string',
-  fieldType: 'string',
-}
+  key: 'string';
+  name: 'string';
+  fieldType: 'string';
+};
 
 export default defineComponent({
   name: 'property-form',
@@ -143,44 +158,44 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-h2{
+h2 {
   margin-left: 10px;
   position: relative;
   display: inline-block;
 }
-.form{
-  &-layout{
+.form {
+  &-layout {
     display: flex;
   }
 }
-  .arrow{
-      content: '';
-      width:0;
-      height:0;
-      position: absolute;
-      border-left: 4px solid transparent;
-      border-right: 4px solid transparent;
-      z-index: 9999999;
-      border-top: 4px solid rgb(36, 39, 36);
-      cursor: pointer;
-      &-button{
-        left:3px;
-        bottom:5px;
-      }
-      &-select{
-        right: 10px;
-        top: 40px;
-      }
-    }
-.collapse{
+.arrow {
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  z-index: 9999999;
+  border-top: 4px solid rgb(36, 39, 36);
+  cursor: pointer;
+  &-button {
+    left: 3px;
+    bottom: 5px;
+  }
+  &-select {
+    right: 10px;
+    top: 40px;
+  }
+}
+.collapse {
   position: relative;
   display: inline-block;
   width: 12px;
 }
-.fa-trash{
-  color:grey;
+.fa-trash {
+  color: grey;
   position: absolute;
-  top:30px;
-  right:15px;
+  top: 30px;
+  right: 15px;
 }
 </style>

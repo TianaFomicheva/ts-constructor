@@ -17,7 +17,7 @@ export default createStore({
       console.log(payload);
       if (token) {
         try {
-          const res:any = await axios.post(`${api}form`, { schema: payload.schemaVal }, {
+          const res: any = await axios.post(`${api}form`, { schema: payload.schemaVal }, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -30,12 +30,12 @@ export default createStore({
         alert('Вы не авторизованы');
       }
     },
-    async updateScheme({ commit }, payload:any) {
+    async updateScheme({ commit }, payload: any) {
       const { id, schemaVal } = payload;
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const res:any = await axios.post(`${api}form/${id}`, { schema: schemaVal.schema }, {
+          const res: any = await axios.post(`${api}form/${id}`, { schema: schemaVal.schema }, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -49,7 +49,7 @@ export default createStore({
       }
       return true;
     },
-    async getSchemes({ commit }):Promise<any> {
+    async getSchemes({ commit }): Promise<any> {
       const token = localStorage.getItem('token');
       if (token) {
         try {
@@ -67,7 +67,7 @@ export default createStore({
       }
       return false;
     },
-    async getScheme({ commit }, payload:number):Promise<any> {
+    async getScheme({ commit }, payload: number): Promise<any> {
       const token = localStorage.getItem('token');
       if (token) {
         try {
@@ -98,7 +98,7 @@ export default createStore({
       try {
         console.log(commit);
         await axios.post(`${api}auth/login`, { username: payload.username, password: payload.password })
-          .then((response:any) => { localStorage.setItem('token', response.data.access_token); window.location.reload(); });
+          .then((response: any) => { localStorage.setItem('token', response.data.access_token); window.location.reload(); });
       } catch (error) {
         console.error(error);
       }
@@ -110,6 +110,6 @@ export default createStore({
   modules: {
   },
   getters: {
-    isLogged: (state:any) => state.isLogged,
+    isLogged: (state: any) => state.isLogged,
   },
 });
