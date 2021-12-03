@@ -12,7 +12,11 @@
       :key="property.isErr" />
       <input v-else-if="property.fieldType =='phone'" :ref="`field_${idx}`"
       v-maska="'+7(###) ###-####'"  />
-      <select v-else :ref="`field_${idx}`"></select>
+      <select v-else :ref="`field_${idx}`">
+        <option value="var1">Вариант 1</option>
+        <option value="var2">Вариант 2</option>
+        <option value="var3">Вариант 3</option>
+      </select>
     </div>
     </div>
      <button class="button-primary" @click="validate">Валидация</button>
