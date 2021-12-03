@@ -2,6 +2,7 @@
   <div class="flex start">
     <div class="switch-wrapper">
       <div
+        id="switch1"
         input-id="switch1"
         class="switch"
         style="

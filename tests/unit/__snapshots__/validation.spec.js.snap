@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Validation.vue renders snapshot 1`] = `
+<h3 class="title">Валидация</h3>
+<div class="form-field">
+  <switch-stub propval="false"></switch-stub>
+</div>
+<div class="form-field">
+  <min-max-stub prop-val="[object Object]"></min-max-stub>
+</div>
+<!--v-if-->
+`;

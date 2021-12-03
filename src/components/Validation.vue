@@ -3,7 +3,7 @@
   <div class="form-field">
     <Switch
       @toggle-required="toggleRequired"
-      :prop-val="curValidParams.isRequired"
+      :prop-val="curValidParams?.isRequired"
     />
   </div>
   <div class="form-field">
@@ -11,13 +11,13 @@
       v-if="validateMinMax"
       @set-min="setMin"
       @set-max="setMax"
-      :prop-val="{ min: curValidParams.minVal, max: curValidParams.maxVal }"
+      :prop-val="{ min: curValidParams?.minVal, max: curValidParams?.maxVal }"
     />
   </div>
   <RegExp
     v-if="validateRegExp"
     @set-reg-exp="setRegExp"
-    :prop-val="curValidParams.regExp"
+    :prop-val="curValidParams?.regExp"
   />
 </template>
 
