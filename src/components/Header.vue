@@ -15,7 +15,7 @@
       </div>
       <div class="header-links__right">
         <div class="header-link">
-        <router-link to="/logout">Выйти</router-link>
+        <a @click="toLogout">Выйти</a>
         </div>
       </div>
       </div>
@@ -25,9 +25,17 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { mapActions, mapGetters } from 'vuex';
 
 export default defineComponent({
   name: 'Header',
+  methods: {
+    ...mapActions(['logout']),
+    toLogout() {
+      this.logout();
+      window.location.reload();
+    },
+  },
 });
 </script>
 <style lang="scss" scoped>

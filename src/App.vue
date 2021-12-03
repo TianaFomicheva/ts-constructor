@@ -1,8 +1,8 @@
-<template>
+<template >
   <div id="nav">
-    <Header />
+    <Header @to-logout="toLogout" v-if="isLogged"/>
   </div>
-  <router-view/>
+  <router-view @to-login="toLogin" />
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
@@ -13,6 +13,24 @@ export default defineComponent({
   name: 'Home',
   components: {
     Header,
+  },
+  data() {
+    return {
+      loginState: 0,
+    };
+  },
+  computed: {
+    isLogged() {
+      return localStorage.getItem('token') ? 1 : 0;
+    },
+  },
+  methods: {
+    toLogout() {
+      window.location.reload();
+    },
+    toLogin() {
+      window.location.reload();
+    },
   },
 });
 </script>

@@ -58,6 +58,14 @@
     padding: 0 15px;
     position: relative;
     transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    &:active, &:focus{
+      border: 1px solid #1390E5;
+      background: #1391e51e;
+      &,&+svg{      
+      color:  #1390E5;
+     
+      }
+    }
   }
   label {
     display: block;

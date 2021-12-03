@@ -98,10 +98,13 @@ export default createStore({
       try {
         console.log(commit);
         await axios.post(`${api}auth/login`, { username: payload.username, password: payload.password })
-          .then((response:any) => { localStorage.setItem('token', response.data.access_token); });
+          .then((response:any) => { localStorage.setItem('token', response.data.access_token); window.location.reload(); });
       } catch (error) {
         console.error(error);
       }
+    },
+    logout() {
+      localStorage.removeItem('token');
     },
   },
   modules: {

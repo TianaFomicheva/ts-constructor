@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Login v-if="!isLogged"/>
-    <Schemes v-else/>
+    <Schemes   v-if="isLogged" />
+    <Login v-else @to-login="toLogin"/>
   </div>
 </template>
 
@@ -18,7 +18,12 @@ export default defineComponent({
     Login,
   },
   data() {
-    return { };
+    return { startState: 0 };
+  },
+  props: {
+    state: {
+      type: Number,
+    },
   },
   computed: {
     isLogged() {
