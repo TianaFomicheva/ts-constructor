@@ -62,6 +62,7 @@ export default defineComponent({
   & a {
     text-decoration: none;
     color: #1390e5;
+    cursor: pointer;
   }
 }
 </style>
