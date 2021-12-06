@@ -60,8 +60,8 @@ export default defineComponent({
     },
   },
   methods: {
-    toggleRequired() {
-      this.isRequired = !this.isRequired;
+    toggleRequired(required:boolean) {
+      this.isRequired = required;
       this.$emit('set-required', this.isRequired);
     },
     setMin(val: string) {

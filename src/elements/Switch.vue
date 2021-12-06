@@ -30,30 +30,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 
 export default defineComponent({
   name: 'switch',
-  data() {
-    return { isChecked: false };
-  },
-  props: {
-    propVal: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  mounted() {
-    this.isChecked = this.propVal;
-  },
-  methods: {
-    doNoting() {
-      return false;
-    },
-    toggleRequired() {
-      this.isChecked = !this.isChecked;
-      this.$emit('toggle-required');
-    },
+  emits: ['toggle-required'],
+  props: ['propVal'],
+  setup(props: any, { emit }) {
+    const isChecked = ref(false);
+
+    onMounted(() => {
+      isChecked.value = props.propVal;
+    });
+    const doNoting = () => false;
+    const toggleRequired = () => {
+      isChecked.value = !isChecked.value;
+      emit('toggle-required', isChecked.value);
+    };
+    return {
+      isChecked, toggleRequired,
+    };
   },
 });
 </script>
