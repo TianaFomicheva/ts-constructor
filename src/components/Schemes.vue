@@ -58,6 +58,7 @@ export default defineComponent({
   methods: {
     ...mapActions(['getSchemes', 'getScheme', 'updateScheme']),
     async editScheme(id: number) {
+      this.showSchema = false;
       const curScheme = await this.getScheme(id);
       this.curSchema = curScheme;
       this.showSchema = true;
