@@ -2,7 +2,8 @@
   <div class="container">
     <div class="layout">
       <h1 class="title left">Мои схемы</h1>
-      <div v-for="scheme in schemes" :key="scheme.key" class="table-row">
+      <div v-for="scheme in schemes" :key="`${scheme.key}_${scheme.schema.schemaName}`"
+      class="table-row">
         <div class="table-cell-55 left">{{ scheme.schema.schemaName }}</div>
         <div class="table-cell-15" @click="showScheme(scheme.id)">
           <span class="link blue">Просмотреть</span>
@@ -14,10 +15,7 @@
           <span class="link red">Удалить</span>
         </div>
       </div>
-      <NewEditScheme v-if="showSchema" :cur-schema="curSchema" />
-      <button class="button-primary" @click="createUpdateSchema">
-        Создать схему
-      </button>
+      <NewEditScheme v-if="showSchema" :cur-schema="curSchema" @close-form="closeForm"/>
     </div>
   </div>
 </template>
@@ -57,6 +55,15 @@ export default defineComponent({
   },
   methods: {
     ...mapActions(['getSchemes', 'getScheme', 'updateScheme']),
+    closeForm() {
+      this.$nextTick(() => {
+        this.showSchema = false;
+        setTimeout(() => window.location.reload(), 200);
+        // timeout - чтобы успели прийти обновленные данные
+        // TODO прописать цепочку проверок, если обновилось название, то обновлять
+        // список через splice, без перезагрузки страницы
+      });
+    },
     async editScheme(id: number) {
       this.showSchema = false;
       const curScheme = await this.getScheme(id);

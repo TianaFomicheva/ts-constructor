@@ -3,7 +3,7 @@
   <div class="dotted">
     <label
       ><span class="red">*</span> Название схемы
-      <input v-model="schemaName" />
+      <input v-model="schemaTitle" />
     </label>
   </div>
   <h2>Свойства схемы</h2>
@@ -55,7 +55,7 @@ export default defineComponent({
   data() {
     return {
       properties: Array<propertyType>(),
-      schemaName: '',
+      schemaTitle: '',
       deleteErr: false,
     };
   },
@@ -81,11 +81,12 @@ export default defineComponent({
   },
   methods: {
     assignPropValues(schema: any) {
-      this.schemaName = schema.schemaName;
+      this.schemaTitle = schema.schemaName;
       this.properties = schema.properties;
     },
     ...mapActions(['createScheme', 'updateScheme']),
     setPropertyItem(item: any) {
+      console.log(item);
       const index = this.properties.findIndex(
         (itm: any) => itm.key === item.key,
       );
@@ -113,14 +114,31 @@ export default defineComponent({
     },
     createUpdateSchema() {
       if (this.curSchema?.id) {
-        this.updateScheme({ id: this.curSchema.id, schemaVal: this.curSchema });
+        try {
+          this.updateScheme({
+            id: this.curSchema.id,
+            schemaVal: {
+              schema: {
+                schemaName: this.schemaTitle,
+                properties: this.properties,
+              },
+            },
+          });
+          this.$emit('close-form');
+        } catch (error) {
+          console.log(error);
+        }
       } else {
-        this.createScheme({
-          schemaVal: {
-            schemaName: this.schemaName,
-            properties: this.properties,
-          },
-        });
+        try {
+          this.createScheme({
+            schemaVal: {
+              schemaName: this.schemaTitle,
+              properties: this.properties,
+            },
+          });
+        } catch (error) {
+          console.log(error);
+        }
       }
     },
   },
